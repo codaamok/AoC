@@ -20,6 +20,17 @@ function Get-DeepClone
     }
 }
 
+function Get-FinalScore {
+    param (
+        [Object]$Board,
+        [int]$BingoNumber
+    )
+    foreach ($item in $Board.GetEnumerator().Where{-not $_.value.marked}) {
+        $unmarkedSum += [int]$item.key
+    }
+    $unmarkedSum * $BingoNumber
+}
+
 $data = Get-Content $pwd\aoc-day4.txt
 $bingoNumbers = $data[0] -split ','
 $lines = ($data[2..$data.Count]).Where{ -not [String]::IsNullOrWhiteSpace($_) }
@@ -76,17 +87,6 @@ $boards = for ($l = 0; $l -lt $lines.Count; $l++) {
             }
         }
     }
-}
-
-function Get-FinalScore {
-    param (
-        [Object]$Board,
-        [int]$BingoNumber
-    )
-    foreach ($item in $Board.GetEnumerator().Where{-not $_.value.marked}) {
-        $unmarkedSum += [int]$item.key
-    }
-    $unmarkedSum * $BingoNumber
 }
 
 # Part 1 answer
