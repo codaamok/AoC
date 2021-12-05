@@ -1,5 +1,4 @@
-function Get-DeepClone
-{
+function Get-DeepClone {
     # https://powershellexplained.com/2016-11-06-powershell-hashtable-everything-you-wanted-to-know-about/#deep-copies
     [cmdletbinding()]
     param(
@@ -55,14 +54,12 @@ $boards = for ($l = 0; $l -lt $lines.Count; $l++) {
     }
 }
 
-1..$boards.Count | ForEach-Object -Begin {
-    $boardWinningStatus = @{}
-} -Process {
-    $boardWinningStatus[$_] = $false
-}
+$boardWinningStatus = @{}
+$foundFirstBoard = $false
 
 :parentloop foreach ($bingoNumber in $bingoNumbers) {
     for ($b = 0; $b -lt 100; $b++) {
+        $boardWinningStatus[$b] = $false
         $board = $boards[$b]
         if ($board[[int]$bingoNumber]) {
             ($board[[int]$bingoNumber]).marked = $true
@@ -71,9 +68,10 @@ $boards = for ($l = 0; $l -lt $lines.Count; $l++) {
             foreach ($n in 1..5) {
                 foreach ($item in "row","col") {
                     if ($board.values.Where{$_.$item -eq $n -And $_.marked -eq $true}.count -eq 5) {
-                        $boardWinningStatus[$b+1] = $true
+                        $boardWinningStatus[$b] = $true
                         $numOfWinningBoards = ($boardWinningStatus.Values -match "True").count
-                        if ($numOfWinningBoards -eq 1) {
+                        if ($numOfWinningBoards -eq 1 -And -not $foundFirstBoard) {
+                            $foundFirstBoard = $true
                             $firstBoard = Get-DeepClone $boards[$b]
                             $firstBoardBingoNumber = $bingoNumber
                         }
