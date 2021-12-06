@@ -1,19 +1,34 @@
 # Part 1
 
-[int[]]$fishies = (Get-Content $pwd\aoc-day6.txt) -split ','
+$fish = @{}
 
-for ($d = 0; $d -lt 80; $d++, ([int[]]$n = @())) {
-    Write-Host "Working on day $d"
-    for ($f = 0; $f -lt $fishies.count; $f++) {
-        $fishies[$f] -= 1
-        if ($fishies[$f] -eq -1) {
-            $fishies[$f] = 6
-            $n += 8
-        }
-    }
-    if ($n -ne 0) {
-        $fishies += $n
-    }
+0..8 | ForEach-Object {
+    $fish[$_] = 0
 }
 
-$fishies.count
+(Get-Content $pwd\aoc-day6.txt) -split ',' | ForEach-Object {
+    $fish[[int]$_] += 1
+}
+
+for ($d = 0; $d -lt 80; $d++) {
+    $respawn = 0
+    for ($i = 0; $i -lt 9; $i++) {
+        if ($i -eq 0) {
+            $respawn += $fish[$i]
+        }
+        else {
+            $fish[$i-1] += $fish[$i]
+        }
+        $fish[$i] = 0
+    }
+    $fish[6] += $respawn
+    $fish[8] += $respawn
+}
+
+$sum = 0 
+
+foreach ($key in $fish.keys) {
+    $sum += $fish[$key]
+}
+
+$sum
