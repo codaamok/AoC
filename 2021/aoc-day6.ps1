@@ -13,6 +13,7 @@ $fish = @{}
 
 do {
     $respawn = 0
+
     for ($i = 0; $i -lt 9; $i++) {
         if ($i -eq 0) {
             $respawn += $fish[$i]
@@ -20,16 +21,16 @@ do {
         else {
             $fish[$i-1] += $fish[$i]
         }
+
         $fish[$i] = 0
     }
+
     $fish[6] += $respawn
     $fish[8] += $respawn
 
     $d++
 } while ($d -lt $days)
 
-foreach ($key in $fish.keys) {
-    $sum += $fish[$key]
-}
+$fish.values | ForEach-Object { $sum += $_ }
 
 $sum
