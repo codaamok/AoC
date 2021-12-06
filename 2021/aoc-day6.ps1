@@ -1,16 +1,17 @@
 # Part 1
+$days = 80
 
+# Part 2
+#$days = 256
+
+$sum = $d = 0
 $fish = @{}
-
-0..8 | ForEach-Object {
-    $fish[$_] = 0
-}
 
 (Get-Content $pwd\aoc-day6.txt) -split ',' | ForEach-Object {
     $fish[[int]$_] += 1
 }
 
-for ($d = 0; $d -lt 256; $d++) {
+do {
     $respawn = 0
     for ($i = 0; $i -lt 9; $i++) {
         if ($i -eq 0) {
@@ -23,9 +24,9 @@ for ($d = 0; $d -lt 256; $d++) {
     }
     $fish[6] += $respawn
     $fish[8] += $respawn
-}
 
-$sum = 0 
+    $d++
+} while ($d -lt $days)
 
 foreach ($key in $fish.keys) {
     $sum += $fish[$key]
