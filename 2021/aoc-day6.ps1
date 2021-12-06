@@ -10,7 +10,7 @@ $fish = @{}
     $fish[[int]$_] += 1
 }
 
-for ($d = 0; $d -lt 80; $d++) {
+for ($d = 0; $d -lt 256; $d++) {
     $respawn = 0
     for ($i = 0; $i -lt 9; $i++) {
         if ($i -eq 0) {
