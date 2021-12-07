@@ -25,7 +25,8 @@ $allfuel = for ($p = $min; $p -lt $max+1; $p++) {
 $allfuel = for ($p = $min; $p -lt $max+1; $p++) {
     $fuel = 0
     foreach ($crab in $crabs) {
-        $fuel += (1..[Math]::Abs($p - $crab - 1) | Measure-Object -Sum).Sum
+        $x = [Math]::Abs($p - $crab - 1)
+        $fuel += $x * ($x + 1) / 2
     }
     $fuel
 }
