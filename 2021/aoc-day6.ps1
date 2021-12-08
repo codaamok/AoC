@@ -2,7 +2,7 @@
 $days = 80
 
 # Part 2
-#$days = 256
+$days = 256
 
 $sum = $d = 0
 $fish = @{}
