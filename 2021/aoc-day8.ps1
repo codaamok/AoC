@@ -18,28 +18,98 @@ $i
 # https://github.com/theznerd/AdventOfCode/blob/main/2021/Day08-Puzzle2.ps1
 $data = Get-Content -Path $pwd\aoc-day8.txt
 
-$numbers = @{}
+$displayNumbers = @{}
 
-foreach ($line in $data) {
-    $1 = [Regex]::Match($line, ' (\w{2}) ').Groups[1].Value
-    $4 = [Regex]::Match($line, ' (\w{4}) ').Groups[1].Value
-    $7 = [Regex]::Match($line, ' (\w{3}) ').Groups[1].Value
-    $8 = [Regex]::Match($line, ' (\w{8}) ').Groups[1].Value
+$displayOutputNumbers = foreach ($line in $data) {
+    $signals, $outputNumbers = $line.Split(' | ')
 
-    $signals, $output = $line.Split(' | ')
+    $signals = $signals.Split(' ') | Sort-Object { $_.length }
 
-    $signals = $signals.Split(' ')
+    $displayNumbers[1] = [char[]]$signals[0]
+    $displayNumbers[4] = [char[]]$signals[2]
+    $displayNumbers[7] = [char[]]$signals[1]
+    $displayNumbers[8] = [char[]]$signals[9]
 
-    switch -Regex (1..9) {
-        [1478] { 
-            $numbers[$_] = [char[]](Get-Variable $_ -ValueOnly)
+    switch -Regex (0..9) {
+        2 { # 2 has 1 segment in common with 1, 2 segments in common with 4, and 2 segments in common with 7 = 5
+            $currentNumber = $_
+            $displayNumbers[$currentNumber] = [char[]]$signals.Where{ 
+                [char[]]$cArray = $_
+                $cArray.count -eq 5 -And 
+                [char[]]($cArray.Where{ $displayNumbers[1] -contains $_ }).Count -eq 1 -And 
+                [char[]]($cArray.Where{ $displayNumbers[4] -contains $_ }).Count -eq 2 -And
+                [char[]]($cArray.Where{ $displayNumbers[7] -contains $_ }).Count -eq 2
+            }[0]
         }
-        default {
-            $numbers[$_] = 
+        3 { # 3 has 2 segments in common with 1, 3 segments in common with 4, and 3 segments in common with 7 = 8
+            $currentNumber = $_
+            $displayNumbers[$currentNumber] = [char[]]$signals.Where{ 
+                [char[]]$cArray = $_
+                $cArray.count -eq 5 -And 
+                [char[]]($cArray.Where{ $displayNumbers[1] -contains $_ }).Count -eq 2 -And 
+                [char[]]($cArray.Where{ $displayNumbers[4] -contains $_ }).Count -eq 3 -And
+                [char[]]($cArray.Where{ $displayNumbers[7] -contains $_ }).Count -eq 3
+            }[0]
+        }
+        5 { # 5 has 1 segment in common with 1, 3 segments in common with 4, and 2 segments in common with 7 = 6
+            $currentNumber = $_
+            $displayNumbers[$currentNumber] = [char[]]$signals.Where{ 
+                [char[]]$cArray = $_
+                $cArray.count -eq 5 -And 
+                [char[]]($cArray.Where{ $displayNumbers[1] -contains $_ }).Count -eq 1 -And 
+                [char[]]($cArray.Where{ $displayNumbers[4] -contains $_ }).Count -eq 3 -And
+                [char[]]($cArray.Where{ $displayNumbers[7] -contains $_ }).Count -eq 2
+            }[0]
+        }
+        0 { # 0 has 2 segments in common with 1, 3 segments in common with 4, and 3 segments in common with 7 = 8
+            $currentNumber = $_
+            $displayNumbers[$currentNumber] = [char[]]$signals.Where{ 
+                [char[]]$cArray = $_
+                $cArray.count -eq 6 -And 
+                [char[]]($cArray.Where{ $displayNumbers[1] -contains $_ }).Count -eq 2 -And 
+                [char[]]($cArray.Where{ $displayNumbers[4] -contains $_ }).Count -eq 3 -And
+                [char[]]($cArray.Where{ $displayNumbers[7] -contains $_ }).Count -eq 3
+            }[0]
+        }
+        6 { # 6 has 1 segment in common with 1, 3 segmenst in common with 4, and 2 segments in common with 7 = 6 
+            $currentNumber = $_
+            $displayNumbers[$currentNumber] = [char[]]$signals.Where{ 
+                [char[]]$cArray = $_
+                $cArray.count -eq 6 -And 
+                [char[]]($cArray.Where{ $displayNumbers[1] -contains $_ }).Count -eq 1 -And 
+                [char[]]($cArray.Where{ $displayNumbers[4] -contains $_ }).Count -eq 3 -And
+                [char[]]($cArray.Where{ $displayNumbers[7] -contains $_ }).Count -eq 2
+            }[0]
+        }
+        9 { # 9 has 2 segments in common with 1, 4 segments in common with 4, and 3 segments in common with 7 = 9
+            $currentNumber = $_
+            $displayNumbers[$currentNumber] = [char[]]$signals.Where{ 
+                [char[]]$cArray = $_
+                $cArray.count -eq 6 -And 
+                [char[]]($cArray.Where{ $displayNumbers[1] -contains $_ }).Count -eq 2 -And 
+                [char[]]($cArray.Where{ $displayNumbers[4] -contains $_ }).Count -eq 4 -And
+                [char[]]($cArray.Where{ $displayNumbers[7] -contains $_ }).Count -eq 3
+            }[0]
         }
     }
-
-    foreach ($number  in 1..9) {
-        $numbers[$number] = $signals.Where{ [char[]]$cArray = $_; $cArrray.count -eq 2 -and $ }
+    
+    $displayOutputNumber = foreach ($number in $outputNumbers.Split(' ')) {
+        $sortedOutput = ([char[]]$number | Sort-Object) -join ''
+        foreach ($number in 0..9) {
+            $sortedNumber = ($displayNumbers[$number] | Sort-Object) -join ''
+            if ($sortedOutput -eq $sortedNumber) {
+                [string]$number
+                break
+            }
+        }
+        
     }
+
+    1 * ($displayOutputNumber -join '')
 }
+
+$total = 0
+foreach ($number in $displayOutputNumbers) {
+    $total += $number
+}
+$total
