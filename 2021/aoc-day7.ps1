@@ -16,6 +16,7 @@ $allfuel = for ($p = $min; $p -lt $max+1; $p++) {
 ($allfuel | Measure-Object -Minimum).Minimum
 
 # Part 2
+# Thanks to Chris Kibble for helping me on this one
 
 [int[]]$crabs = (Get-Content $pwd\aoc-day7.txt) -split ','
 

@@ -1,3 +1,5 @@
+# Chris Dent helped lots on the stream!
+
 $diagReport = Get-Content $pwd\aoc-day3.txt
 
 # Part 1
