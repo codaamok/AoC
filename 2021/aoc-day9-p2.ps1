@@ -122,4 +122,6 @@ $allBasins = for ($iy = 0; $iy -lt $y; $iy++) {
     }
 }
 
-$allBasins | Sort-Object -Descending | Select-Object -First 3
+$r = $allBasins | Sort-Object -Descending | Select-Object -First 3
+
+$r[0] * $r[1] * $r[2]
