@@ -19,7 +19,7 @@ function Get-SurroundingNumbers {
 
     # I don't think this was necessary, mostly as a precaution
     # I think I could go out of range on the first index reference here, and the second out of range reference would just return null
-    if ($right -ge 10) {
+    if ($right -ge $script:heightmap[0].Count) {
         $right = $null
     }
     else {
@@ -35,7 +35,7 @@ function Get-SurroundingNumbers {
     }
 
     # This was needed, however, because you can reference a child index reference if the parent is out of range / null
-    if ($down -ge 5) {
+    if ($down -ge $script:heightmap.Count) {
         $down = $null
     }
     else {
@@ -69,6 +69,7 @@ $riskLevels = for ($iy = 0; $iy -lt $y; $iy++) {
         }
 
         if ($foundLowPoint) {
+            "Found low point {0} in x{1} y{2}" -f $centre, $ix, $iy | Write-Verbose -Verbose
             # Increase by 1 to get risk level
             [int]$centre + 1
         }
