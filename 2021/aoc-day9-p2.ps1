@@ -71,6 +71,7 @@ function Get-Basin {
     )
 
     $script:basinCounter++
+    # Update exclusion tracker, regardless, because I don't want to go back on myself
     $script:basinExclTracker[$xy] += 1
 
     [int]$x, [int]$y = $xy -split ','
@@ -83,7 +84,6 @@ function Get-Basin {
         $nextx, $nexty = $nextxy.Split(',')
 
         if ($null -ne $number -And [int]$number -lt 9 -And [int]$number -gt $c -And -not $script:basinExclTracker[$nextxy]) {
-            # Update exclusion tracker, regardless, because I don't want to go back on myself
             Get-Basin -c $number -xy ("{0},{1}" -f $nextx, $nexty)
         }
     }
@@ -103,7 +103,7 @@ $allBasins = for ($iy = 0; $iy -lt $y; $iy++) {
         $centre = $heightmap[$iy][$ix]
 
         $SurroundingNumbers = Get-SurroundingNumbers -x $ix -y $iy
-        
+
         $foundLowPoint = $true
         foreach ($direction in $SurroundingNumbers.Keys) {
             if ($null -ne $SurroundingNumbers[$direction]["Value"] -and [int]$SurroundingNumbers[$direction]["Value"] -le [int]$centre) {
