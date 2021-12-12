@@ -112,6 +112,8 @@ function Invoke-RareBioluminescentDumboOctopusStep {
     }
 }
 
+# Part 1
+
 $octopuses = Get-Content $pwd\aoc-day11.txt
 
 $grid = foreach ($line in $octopuses) {
@@ -135,4 +137,28 @@ for ($s = 0; $s -lt $steps; $s++) {
 
 $flashes
 
-$grid.ForEach{$_ -join ''}
+# Part 2
+
+$octopuses = Get-Content $pwd\aoc-day11.txt
+
+$grid = foreach ($line in $octopuses) {
+    ,[int[]]($line -split '').Where{'' -ne $_}
+}
+
+$y = $grid.count
+$x = $grid[0].count
+$flashes = 0
+$steps = 0
+
+while ($flashTracker.Count -ne ($y * $x)) {
+    $flashTracker = @{}
+    for ($iy = 0; $iy -lt $y; $iy++) {
+        for ($ix = 0; $ix -lt $x; $ix++) {
+            $xy = "{0},{1}" -f $ix, $iy
+            Invoke-RareBioluminescentDumboOctopusStep -xy $xy
+        }
+    }
+    $steps++
+}
+
+$steps
