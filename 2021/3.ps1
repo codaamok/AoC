@@ -1,6 +1,6 @@
 # Chris Dent helped lots on the stream!
 
-$diagReport = Get-Content $pwd\aoc-day3.txt
+$diagReport = Get-Content $pwd\day3.txt
 
 # Part 1
 
@@ -41,7 +41,7 @@ foreach ($array in $a,$b,$c,$d,$e,$f,$g,$h,$i,$j,$k,$l) {
 $oxygen = $co2 = '0b'
 # true is the bit criteria for oxygen, false is the bit criteria for co2
 foreach ($bool in $true,$false) {
-    $diagReport = Get-Content $pwd\aoc-day3.txt
+    $diagReport = Get-Content $pwd\day3.txt
     # Determine oxygen generator rating
     for ($i = 0; $i -lt 12; $i++) {
         # Get all bits in the current position

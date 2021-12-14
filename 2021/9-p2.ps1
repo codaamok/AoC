@@ -89,7 +89,7 @@ function Get-Basin {
     }
 }
 
-$heightmap = Get-Content $pwd\aoc-day9.txt
+$heightmap = Get-Content $pwd\day9.txt
 
 $script:heightmap = foreach ($line in $heightmap) {
     ,[int[]]($line -split '').Where{'' -ne $_}

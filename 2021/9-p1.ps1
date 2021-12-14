@@ -45,7 +45,7 @@ function Get-SurroundingNumbers {
     return @{up = $up; right = $right; down = $down; left = $left}
 }
 
-$script:heightmap = Get-Content $pwd\aoc-day9.txt
+$script:heightmap = Get-Content $pwd\day9.txt
 
 $heightmap = foreach ($line in $heightmap) {
     ,[int[]]($line -split '').Where{'' -ne $_}

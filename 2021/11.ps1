@@ -114,7 +114,7 @@ function Invoke-RareBioluminescentDumboOctopusStep {
 
 # Part 1
 
-$octopuses = Get-Content $pwd\aoc-day11.txt
+$octopuses = Get-Content $pwd\day11.txt
 
 $grid = foreach ($line in $octopuses) {
     ,[int[]]($line -split '').Where{'' -ne $_}
@@ -139,7 +139,7 @@ $flashes
 
 # Part 2
 
-$octopuses = Get-Content $pwd\aoc-day11.txt
+$octopuses = Get-Content $pwd\day11.txt
 
 $grid = foreach ($line in $octopuses) {
     ,[int[]]($line -split '').Where{'' -ne $_}

@@ -30,7 +30,7 @@ function Get-FinalScore {
     $unmarkedSum * $BingoNumber
 }
 
-$data = Get-Content $pwd\aoc-day4.txt
+$data = Get-Content $pwd\day4.txt
 $bingoNumbers = $data[0] -split ','
 $lines = ($data[2..$data.Count]).Where{ -not [String]::IsNullOrWhiteSpace($_) }
 

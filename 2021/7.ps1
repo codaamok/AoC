@@ -1,6 +1,6 @@
 # Part 1
 
-[int[]]$crabs = (Get-Content $pwd\aoc-day7.txt) -split ','
+[int[]]$crabs = (Get-Content $pwd\day7.txt) -split ','
 
 [int]$min = ($crabs | Measure-Object -Minimum).Minimum
 [int]$max = ($crabs | Measure-Object -Maximum).Maximum
@@ -18,7 +18,7 @@ $allfuel = for ($p = $min; $p -lt $max+1; $p++) {
 # Part 2
 # Thanks to Chris Kibble for helping me on this one
 
-[int[]]$crabs = (Get-Content $pwd\aoc-day7.txt) -split ','
+[int[]]$crabs = (Get-Content $pwd\day7.txt) -split ','
 
 [int]$min = ($crabs | Measure-Object -Minimum).Minimum
 [int]$max = ($crabs | Measure-Object -Maximum).Maximum

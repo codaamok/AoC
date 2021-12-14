@@ -1,0 +1,1 @@
+$caves = Get-ChildItem -Path $pwd\12.txt

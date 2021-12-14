@@ -1,4 +1,4 @@
-$depths = Get-Content $pwd\aoc-day1.txt
+$depths = Get-Content $pwd\day1.txt
 
 # Part 1
 

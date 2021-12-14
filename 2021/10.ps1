@@ -12,7 +12,7 @@ function Remove-Chunks {
     else { $String }
 }
 
-$navigationSubsystem = Get-Content .\aoc-day10.txt
+$navigationSubsystem = Get-Content .\day10.txt
 
 $Score = @{
     ")" = 3

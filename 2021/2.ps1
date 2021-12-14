@@ -1,4 +1,4 @@
-$inputData = Get-Content $pwd\aoc-day2.txt
+$inputData = Get-Content $pwd\day2.txt
 
 # Part 1
 $horizontal = 0

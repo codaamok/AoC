@@ -7,7 +7,7 @@ $days = 256
 $sum = $d = 0
 $fish = @{}
 
-(Get-Content $pwd\aoc-day6.txt) -split ',' | ForEach-Object {
+(Get-Content $pwd\day6.txt) -split ',' | ForEach-Object {
     $fish[[int]$_] += 1
 }
 

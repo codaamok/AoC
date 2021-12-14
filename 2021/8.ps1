@@ -1,4 +1,4 @@
-$data = Get-Content -Path $pwd\aoc-day8.txt | ForEach-Object { $_.split(" | ")[1] }
+$data = Get-Content -Path $pwd\day8.txt | ForEach-Object { $_.split(" | ")[1] }
 
 # Part 1
 $i = 0
@@ -16,7 +16,7 @@ $i
 
 # Part 2, inspired by Nathan Ziehnert's after giving up and reading his code
 # https://github.com/theznerd/AdventOfCode/blob/main/2021/Day08-Puzzle2.ps1
-$data = Get-Content -Path $pwd\aoc-day8.txt
+$data = Get-Content -Path $pwd\day8.txt
 
 $displayNumbers = @{}
 

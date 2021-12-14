@@ -1,5 +1,5 @@
 # Part 1
-$data = Get-Content $pwd\aoc-day5.txt
+$data = Get-Content $pwd\day5.txt
 $coordinates = @{}
 $overlaps = @{}
 
@@ -29,7 +29,7 @@ foreach ($line in $data) {
 $overlaps.count
 
 # Part 2
-$data = Get-Content $pwd\aoc-day5.txt
+$data = Get-Content $pwd\day5.txt
 $coordinates = @{}
 $overlaps = @{}
 
